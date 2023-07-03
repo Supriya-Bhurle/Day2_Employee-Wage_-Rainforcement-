@@ -1,49 +1,43 @@
 package com.bridgelabz;
 
 public class EmployeeWage {
-    static final int Wage_Per_Hour = 20;
-    static final int Full_Time_Hour = 8;
-    static final int Part_Time_Hour = 4;
-    static final int Is_Part_Time_Hour = 1;
-    static final int Is_Full_Time_Hour = 2;
-    static final int Working_Days_Per_Month = 20;
+    //static int wagePerHr = 20;
+    static int fullTimeHrs = 8;
+    static int partTimeHrs = 4;
+    //  static int totalWorkingDays = 20;
+    //  static int totalWorkingHrs = 100;
 
-    static int employeeAttendance() {
-        int employeeAttendance = (int) Math.floor(Math.random() * 10) % 3;
-        return employeeAttendance;
-    }
+    static void computeEmployeeWage(String company, int wagePerHr, int totalWorkingDays, int totalWorkingHrs){
+        int totalHrs = 0;
+        int days = 0;
+        while (totalHrs < totalWorkingHrs && days < totalWorkingDays){
+            days++;
 
-    static int switchCase() {
-        int day = 1;
-        int totalWage = 0;
-        while (day <= Working_Days_Per_Month) {
-            int dailyWage = 0;
-            int employeeAttendanceCheck = employeeAttendance();
-            System.out.println(employeeAttendanceCheck);
-            switch (employeeAttendanceCheck) {
-                case Is_Full_Time_Hour:
-                    System.out.println("Employee is Present");
-                    dailyWage = Wage_Per_Hour * Full_Time_Hour;
+            int isPresent = (int) Math.floor(Math.random()*10)%3;
+            switch (isPresent){
+                case 1:
+                    totalHrs += fullTimeHrs;
                     break;
-                case Is_Part_Time_Hour:
-                    dailyWage = Wage_Per_Hour * Part_Time_Hour;
-                    System.out.println("Employee is Part Time");
+                case 2:
+                    totalHrs += partTimeHrs;
                     break;
                 default:
-                    System.out.println("Absent");
+                    totalHrs += 0;
+
             }
-            totalWage = totalWage + dailyWage;
-            System.out.println("daily Wage ==> " + day + " day => " + dailyWage);
-            day++;
         }
-        System.out.println("Total Wage => " + totalWage);
-        return totalWage;
+        System.out.println("Monthly wage for : " + company + " is " +totalHrs * wagePerHr);
     }
 
-
     public static void main(String[] args) {
-        int totalWage=switchCase();
-        System.out.println(totalWage);
+        System.out.println("Welcome to Employee Wage Computation Program");
+
+        EmployeeWage c1 = new EmployeeWage();
+        c1.computeEmployeeWage("TCS",25, 20, 100);
+        System.out.println("******************************************");
+        c1.computeEmployeeWage("Infosys", 20, 25, 120);
+
+
     }
 
 }
