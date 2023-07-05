@@ -1,24 +1,24 @@
 package com.bridgelabz;
 
+import java.util.ArrayList;
+
 public class EmployeeWage implements Interface {
-    CompanyBuildWage [] record;
+    ArrayList<CompanyBuildWage> companyEmpWageList;
     int noOfCompany;
-    public EmployeeWage() {
-        record = new CompanyBuildWage[5];
+    public EmployeeWage(){
+        companyEmpWageList = new ArrayList<>();
     }
     public void addCompany(int workingDaysPerMonth, int workingHoursPerMonth, int wagePerHour, String companyName){
         CompanyBuildWage empWage=new CompanyBuildWage(  workingDaysPerMonth, workingHoursPerMonth, wagePerHour, companyName);
         empWage.setTotalWage(calculateWage( workingDaysPerMonth, workingHoursPerMonth, wagePerHour));
-        record[noOfCompany]=empWage;
-        noOfCompany++;
+        companyEmpWageList.add(empWage);
     }
     public static void main(String[] args) {
         EmployeeWage employeeWage = new EmployeeWage();
         employeeWage.addCompany(20,200,70,"TAta");
         employeeWage.addCompany(26,200,60,"TCS");
-        for (int i = 0; i < employeeWage.noOfCompany; i++) {
-            System.out.println(employeeWage.record[i].getCompanyName() + " : " + employeeWage.record[i].getTotalWage());
-
+        for (CompanyBuildWage cmp : employeeWage.companyEmpWageList){
+            System.out.println(cmp.getCompanyName() +" : "+cmp.getTotalWage());
         }
     }
 
@@ -51,8 +51,8 @@ public class EmployeeWage implements Interface {
             totalWage= totalWage + dailyWage;
             day++;
         }
-        System.out.println("Total Wage Of Employee for Month is => "+totalWage);
-        System.out.println("Total Wage Of Employee for day is => "+day);
+        System.out.println("Total Wage Of Employe for Month is => "+totalWage);
+        System.out.println("Total Wage Of Employe for day is => "+day);
         System.out.println("Total Working hour  for Month is => "+workingHours);
         return totalWage;
                }
